@@ -32,15 +32,17 @@ public class Event : RouteElement {
 }
 
 public class End : RouteElement {
-    public string text;
+    public string titleText;
+    public string contentText;
     public Event restartEvent;
     public Event goBackEvent;
 
-    public End(string id, string text) : base (id) {
-        this.text = text;
+    public End(string id, string titleText, string contentText) : base (id) {
+        this.titleText = titleText;
+        this.contentText = contentText;
     }
 
-    public void Route(Event restartEvent, Event goBackEvent) {
+    public void Route(Event goBackEvent, Event restartEvent) {
         this.restartEvent = restartEvent;
         this.goBackEvent = goBackEvent;
     }
@@ -61,7 +63,7 @@ public class Addon {
 
 public class Background : Addon
 {
-    Texture image;
+    public Texture image;
 
     public Background(Texture image, string text = "", AddonType type = AddonType.IMAGE) : base(text, type) {
         this.image = image;
