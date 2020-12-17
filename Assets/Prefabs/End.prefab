@@ -389,10 +389,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 2706697287192322448}
+  backgroundBtn: {fileID: 0}
+  hintBtn: {fileID: 0}
   optionOne: {fileID: 0}
   optionTwo: {fileID: 0}
+  backgroundInfo: {fileID: 0}
+  hintInfo: {fileID: 0}
+  winSound: {fileID: 0}
+  loseSound: {fileID: 0}
   endOptionTitle: {fileID: 2706697287345137579}
   endOptionContent: {fileID: 2706697287956096915}
+  buttonClickSound: {fileID: 8300000, guid: 319d5ea8423383541b330605ff3f04b9, type: 3}
 --- !u!1 &2706697287362344739
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +710,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -180.8}
-  m_SizeDelta: {x: 0, y: 210}
+  m_SizeDelta: {x: -20, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2706697287956096914
 CanvasRenderer:
@@ -770,9 +777,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -24
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

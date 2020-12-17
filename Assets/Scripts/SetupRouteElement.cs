@@ -9,11 +9,20 @@ public class SetupRouteElement : MonoBehaviour
     //Reference variables
     public RawImage background;
     // - event specific
+    public Button backgroundBtn;
+    public Button hintBtn;
     public TMP_Text optionOne;
     public TMP_Text optionTwo;
+    public TMP_Text backgroundInfo;
+    public TMP_Text hintInfo;
+    public AudioClip winSound;
+    public AudioClip loseSound;
     // - end specific
     public TMP_Text endOptionTitle;
     public TMP_Text endOptionContent;
+    public AudioClip buttonClickSound;
+
+
 
     //Instace variables
     bool firstIsCorrect;
@@ -57,10 +66,21 @@ public class SetupRouteElement : MonoBehaviour
                     Background bgAddon = (Background)addon;
                     background.texture = bgAddon.image;
                     break;
+                case AddonType.BACKGROUND:
+                    backgroundInfo.text = addon.text;
+                    break;
+                case AddonType.HINT:
+                    hintInfo.text = addon.text;
+                    break;
                 default:
-                    Debug.LogError("Unsuported Addon Provided - " + AddonType.IMAGE);
+                    Debug.LogError("Unsuported Addon Provided - " + addon.type.ToString());
                     break;
             }
+        }
+
+        if (element.GetType().ToString() == "Event")
+        {
+            OnPressTab(true);
         }
     }
 
@@ -68,13 +88,26 @@ public class SetupRouteElement : MonoBehaviour
         Event curEvent = (Event) element;
 
         if (firstIsCorrect == isFirst) {
+
+            StoryManager.instance.soundPlayer.clip = winSound;
+            StoryManager.instance.soundPlayer.Play();
+
             StoryManager.instance.ShowElement(curEvent.correctChild);
-        } else { 
+
+        } else {
+
+            StoryManager.instance.soundPlayer.clip = loseSound;
+            StoryManager.instance.soundPlayer.Play();
+
             StoryManager.instance.ShowElement(curEvent.incorrectChild);
+
         }
     }
 
-    public void OnPressGoBack() { 
+    public void OnPressGoBack() {
+
+        StoryManager.instance.soundPlayer.clip = buttonClickSound;
+        StoryManager.instance.soundPlayer.Play();
 
         End curEnd = (End) element;
 
@@ -84,8 +117,24 @@ public class SetupRouteElement : MonoBehaviour
 
     public void OnPressRestart() {
 
+        StoryManager.instance.soundPlayer.clip = buttonClickSound;
+        StoryManager.instance.soundPlayer.Play();
+
         End curEnd = (End)element;
 
         StoryManager.instance.ShowElement(curEnd.restartEvent);
+    }
+
+    public void OnPressTab(bool isBackground) {
+
+        StoryManager.instance.soundPlayer.clip = buttonClickSound;
+        StoryManager.instance.soundPlayer.Play();
+
+        backgroundBtn.interactable = !isBackground;
+        hintBtn.interactable = isBackground;
+
+        backgroundInfo.gameObject.SetActive(isBackground);
+        hintInfo.gameObject.SetActive(!isBackground);
+
     }
 }

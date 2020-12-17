@@ -48,7 +48,7 @@ public class End : RouteElement {
     }
 }
 
-public enum AddonType {NOTE, IMAGE};
+public enum AddonType {NOTE, IMAGE, BACKGROUND, HINT};
 
 //Addons provide additional info (like info graphic to the event
 public class Addon {
@@ -69,3 +69,4 @@ public class Background : Addon
         this.image = image;
     }
 }
+
